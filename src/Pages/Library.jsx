@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../components/AuthContext"
 
 function Library() {
@@ -13,6 +13,11 @@ function Library() {
         <div className="p-6">
             <h1 className="text-2xl font-bold">Library page</h1>
             <p className="mt-2">Signed in as {user.email}</p>
+
+            <Link to="/search" className="mt-4 block text-indigo-600 underline">
+              Search for books
+            </Link>
+
             <button 
                 onClick={handleLogout}
                 className="mt-4 rounded bg-indigo-600 px-4 py-2 text=white"
