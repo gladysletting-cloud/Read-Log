@@ -81,12 +81,8 @@ function Goal() {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Reading Goal</h1>
-
-      <Link to="/library" className="mt-4 block text-indigo-600 underline">
-        Back to my library
-      </Link>
+    <main className="p-6 mx-auto max-w-3xl">
+      <h1 className="text-2xl font-bold text-indigo-800">Reading Goal</h1>
 
       {loading && <p className="mt-4">Loading your goal...</p>}
 
@@ -97,24 +93,27 @@ function Goal() {
       )}
 
       {!loading && goal && (
-        <div className="mt-4">
+        <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
           <p>
             You have finished {finished} of {goal.target} books in {goal.year}.
           </p>
 
           <div className="mt-2 h-4 w-full rounded bg-gray-200">
             <div
-              className="h-4 rounded bg-green-600"
+              className="h-4 rounded bg-amber-500"
               style={{ width: percent + '%' }}
             ></div>
           </div>
 
-          <p className="mt-1 text-sm">{percent}% done</p>
+          <p className="mt-1 text-sm text-gray-600">{percent}% done</p>
         </div>
       )}
 
       {!loading && (
-        <form onSubmit={handleSave} className="mt-6">
+        <form 
+          onSubmit={handleSave} 
+          className="mt-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+        >
           <label htmlFor="target" className="block text-sm font-medium">
             How many books do you want to read this year?
           </label>
@@ -128,7 +127,7 @@ function Goal() {
           />
           <button
             type="submit"
-            className="ml-3 rounded bg-indigo-600 px-4 py-2 text-white"
+            className="ml-3 ml-3 rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 bg-indigo-600 px-4 py-2 text-white"
           >
             {goal ? 'Update goal' : 'Save goal'}
           </button>
@@ -138,12 +137,12 @@ function Goal() {
       {!loading && goal && (
         <button
           onClick={handleDelete}
-          className="mt-4 rounded bg-red-600 px-3 py-1 text-white"
+          className="mt-4 mt-4 rounded bg-red-600 px-3 py-1 text-white hover:bg-red-700 bg-red-600 px-3 py-1 text-white"
         >
           Delete goal
         </button>
       )}
-    </div>
+    </main>
   )
 }
 
