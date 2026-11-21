@@ -26,7 +26,7 @@ function App(){
         </ProtectedRoute>
        } 
       />
-      <Routes
+      <Route
         path="/goal"
         element={
           <ProtectedRoute>
