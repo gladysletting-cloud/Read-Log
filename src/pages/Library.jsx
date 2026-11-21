@@ -73,6 +73,10 @@ function Library() {
               Search for books
             </Link>
 
+            <Link to="/goal" className="mt-2 block text-indigo-600 underline">
+                My reading goal
+            </Link>
+
             {loading && <p className="mt-4">Loading your books...</p>}
             {error && <p className="mt-4 text-red-600">{error}</p>}
             {!loading && !error && books.length === 0 &&(

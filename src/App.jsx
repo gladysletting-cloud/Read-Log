@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Library from './pages/Library'
 import Search from "./pages/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Goal from "./pages/Goal";
 
 function App(){
   return(
@@ -24,6 +25,14 @@ function App(){
           <Search />
         </ProtectedRoute>
        } 
+      />
+      <Routes
+        path="/goal"
+        element={
+          <ProtectedRoute>
+            <Goal />
+          </ProtectedRoute>
+        }
       />
 
     </Routes>
