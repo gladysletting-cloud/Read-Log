@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../components/AuthContext"
 import { useEffect, useState } from "react"
-import { getBooks, deleteBook } from "../services/bookService"
+import { getBooks, deleteBook, updateBookStatus } from "../services/bookService"
 
 function Library() {
     const {user, logout} =useAuth()
@@ -24,6 +24,23 @@ function Library() {
         }
         loadBooks()
     }, [user.uid])
+
+    async function handleStatusChange(bookId, newStatus){
+        try{
+            await updateBookStatus(user.uid, bookId, newStatus)
+
+            const newList = books.map((book) =>{
+                if (book.id === bookId) {
+                    return{...book, status: newStatus}
+                }
+                return book
+            })
+            setBooks(newList)
+        }catch(err){
+          console.log(err)
+          setError('Could not change the status. Please try again.')
+        }
+    }
 
     async function handleDelete(bookId){
         const sure = window.confirm('Delete this book forom your library?')
@@ -68,7 +85,20 @@ function Library() {
                         <p className="font-bold">{book.title}</p>
                         <p>{book.author}</p>
                         <p className="text-sm text-gray-500">{book.year}</p>
-                        <p className="mt-1 text-sm">Status: {book.status}</p>
+
+                        <label htmlFor={'status-'+ book.id} className="mt-1 text-sm">
+                            Status
+                        </label>
+                        <select
+                          id={'status-'+ book.id}
+                          value={book.status}
+                          onChange={(e) => handleStatusChange(book.id, e.target.value)}
+                          className="rounded border border-gray-300 px-2 py-1"
+                        >
+                            <option value="Want to read">Want to read</option>
+                            <option value="Reading">Reading</option>
+                            <option value="Finished">Finished</option>
+                        </select>
                         <button
                           onClick={() => handleDelete(book.id)}
                           className="mt-2 rounded bg-red-600 px-3 py-1 text-white"
