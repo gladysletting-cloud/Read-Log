@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../components/AuthContext"
 import { useEffect, useState } from "react"
-import { getBooks } from "../services/bookService"
+import { getBooks, deleteBook } from "../services/bookService"
 
 function Library() {
     const {user, logout} =useAuth()
@@ -25,13 +25,31 @@ function Library() {
         loadBooks()
     }, [user.uid])
 
+    async function handleDelete(bookId){
+        const sure = window.confirm('Delete this book forom your library?')
+        if (!sure){
+            return
+        }
+        setError('')
+
+        try{
+            await deleteBook(user.uid, bookId)
+            
+            const newList = books.filter((book) => book.id !== bookId)
+            setBooks(newList)
+        }catch(err){
+            console.log(err)
+            setError('Could not delete the book. Please try again.')
+        }
+    }
+
     async function handleLogout() {
         await logout()
         navigate('/login')
     }
     return(
         <div className="p-6">
-            <h1 className="text-2xl font-bold">Library page</h1>
+            <h1 className="text-2xl font-bold">My Library</h1>
             <p className="mt-2">Signed in as {user.email}</p>
 
             <Link to="/search" className="mt-4 block text-indigo-600 underline">
@@ -46,11 +64,17 @@ function Library() {
 
             <ul className="mt-4 space-y-3">
                 {books.map((book) =>(
-                    <li key={book.id} className="rounded border border-gray-300 p">
+                    <li key={book.id} className="rounded border border-gray-300 p-3">
                         <p className="font-bold">{book.title}</p>
                         <p>{book.author}</p>
                         <p className="text-sm text-gray-500">{book.year}</p>
                         <p className="mt-1 text-sm">Status: {book.status}</p>
+                        <button
+                          onClick={() => handleDelete(book.id)}
+                          className="mt-2 rounded bg-red-600 px-3 py-1 text-white"
+                        >
+                            Delete
+                        </button>
                     </li>
                 ))}
             </ul>
