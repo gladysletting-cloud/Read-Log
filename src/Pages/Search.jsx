@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "../components/AuthContext";
+import { addBook } from "../bookService";
 
 function Search(){
     const [query, setQuery]= useState('')
@@ -6,6 +8,8 @@ function Search(){
     const [loading, setLoading]= useState(false)
     const [error, setError]= useState('')
     const [searched, setSearched]= useState(false)
+    const [message, setMessage]= useState('')
+    const {user} = useAuth()
 
     async function handleSearch(e){
         e.preventDefault()
@@ -15,9 +19,10 @@ function Search(){
         }
         setLoading(true)
         setError('')
+        setMessage('')
 
         try{
-            const response = await Fetch(
+            const response = await fetch(
                 'https://openlibrary.org/search.json?q=' +
                 encodeURIComponent(query) +
                 '&limit=10'
@@ -33,6 +38,22 @@ function Search(){
             setError('Could not load books. Please try again.')
         }
         setLoading(false)
+    }
+    async function handleAdd(book){
+      setMessage('')
+
+      try{
+        await addBook(user.uid,{
+          title: book.title,
+          author: book.author_name ? book.author_name[0] : 'Unknown author',
+          year: book.first_publish_year || '',
+          status: 'Want to read',
+        })
+        setMessage('Added' + book.title +'to your library.')
+      }catch(err){
+        console.log(err)
+        setMessage('Could not add the book. Please try again.')
+      }
     }
     return (
     <div className="p-6">
@@ -58,6 +79,8 @@ function Search(){
 
       {error && <p className="mt-4 text-red-600">{error}</p>}
 
+      {message && <p className="mt-4 text-green-700">{message}</p>}
+
       {searched && !loading && books.length === 0 && (
         <p className="mt-4">No books found.</p>
       )}
@@ -70,6 +93,11 @@ function Search(){
             <p className="text-sm text-gray-500">
               {book.first_publish_year}
             </p>
+            <button onClick={() => handleAdd(book)}
+              className="mt-2 rounded bg-indigo-600 px-3 py-1 text-white"
+            >
+              Add to library
+            </button>
           </li>
         ))}
       </ul>
