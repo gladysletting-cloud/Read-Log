@@ -4,20 +4,20 @@ import { useAuth } from '../components/AuthContext'
 
 function getErrorMessage(error) {
     switch (error.code) {
-        case 'auth/invalid/credential':
-        case 'authwrong-password':
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
         case 'auth/user-not-found':
-            return 'Invalid email or passsword.'
+            return 'Invalid email or password.'
         case 'auth/email-already-in-use':
             return 'An account with this email already exists.'
         case 'auth/weak-password':
-            return 'password must be atleast 6 characters.'
+            return 'Password must be at least 6 characters.'
         case 'auth/invalid-email':
-            return 'Enther a valid email address.'
+            return 'Enter a valid email address.'
         case 'auth/popup-closed-by-user':
             return 'Google sign-in was cancelled.'
         default:
-            return 'something went wrong. Please try again.'
+            return 'Something went wrong. Please try again.'
 
     }
 }
@@ -40,7 +40,7 @@ function Login() {
         setError('')
     }
     const handleSubmit = async (e) => {
-        e.provideDefault()
+        e.preventDefault()
         setError('')
 
         if (isRegister && !name.trim()) {
@@ -52,7 +52,7 @@ function Login() {
             if (isRegister) {
                 await register(name.trim(), email, password)
             } else {
-                await login('email, password')
+                await login(email, password)
             }
             navigate('/library')
         } catch (err) {
