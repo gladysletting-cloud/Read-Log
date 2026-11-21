@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
 export async function addBook(userId, book) {
@@ -15,4 +15,8 @@ export async function getBooks(userId){
         books.push(book)
     })
     return books
+}
+export async function deleteBook(userId, bookId){
+    const bookRef = doc(db, 'user', userId, 'books', bookId)
+    await deleteDoc(bookRef)
 }

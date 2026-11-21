@@ -7,7 +7,7 @@ import {
     onAuthStateChanged,
     updateProfile,
 } from 'firebase/auth'
-import { auth, googleProvider} from '../firebase'
+import { auth, googleProvider} from '../services/firebase'
 
 const AuthContext = createContext(null)
 

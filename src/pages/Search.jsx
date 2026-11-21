@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../components/AuthContext";
-import { addBook } from "../bookService";
+import { addBook } from "../services/bookService";
 
 function Search(){
     const [query, setQuery]= useState('')

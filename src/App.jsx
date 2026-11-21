@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from './Pages/Login'
-import Library from './Pages/Library'
-import Search from "./Pages/Search";
+import Login from './pages/Login'
+import Library from './pages/Library'
+import Search from "./pages/Search";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App(){
