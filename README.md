@@ -1,16 +1,180 @@
-# React + Vite
+# 📚 Read-Log
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Read-Log is a React-based book tracking application that helps users organize their reading, keep track of their books, and set yearly reading goals.
 
-Currently, two official plugins are available:
+## 🎯 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Read-Log provides a simple and user-friendly way to manage a personal reading library. Users can add books, update their reading status, delete books, and monitor their progress toward a yearly reading goal.
 
-## React Compiler
+The project is designed to practice building a responsive web application using React and modern web development concepts.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔐 User login and registration
+- 📚 Add books to a personal library
+- 🔄 Update book reading status
+  - Want to Read
+  - Reading
+  - Finished
+- 🗑️ Delete books
+- 🔎 Search and manage books
+- 🎯 Set a yearly reading goal
+- 📊 Track progress toward the reading goal
+- 📱 Responsive design for different screen sizes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies Used
+
+- React
+- JavaScript
+- HTML
+- TailwindCSS
+- Vite
+- Git & GitHub
+
+## 📁 Project Structure
+
+```text
+read-log/
+├── src/
+│   ├── components/
+│   ├── pages/
+|   ├── services/
+│   ├── App.jsx
+│   ├── App.css
+│   └── main.jsx
+├── public/
+├── package.json
+├── index.html
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+Navigate into the project:
+
+```bash
+cd read-log
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will then be available through the local development URL provided by Vite.
+
+## 🔄 How It Works
+
+### Books
+
+Users can add a book by providing the book title, author, and reading status.
+
+Each book can then be updated as the user progresses from:
+
+```text
+Want to Read → Reading → Finished
+```
+
+Users can also remove books from their library.
+
+### Reading Goals
+
+Users can set the number of books they want to finish during the year.
+
+Read-Log calculates the user's progress based on the number of books marked as **Finished**.
+
+For example:
+
+```text
+Finished: 5 books
+Goal: 20 books
+
+Progress: 25%
+```
+
+## 📡 API
+
+The API/data storage layer will be documented here once the final API implementation is connected.
+
+### Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/books` | Retrieve books |
+| POST | `/books` | Add a new book |
+| PATCH | `/books/:id` | Update a book |
+| DELETE | `/books/:id` | Delete a book |
+| GET | `/goals` | Retrieve reading goals |
+| POST | `/goals` | Create a reading goal |
+| PATCH | `/goals/:id` | Update a reading goal |
+
+> Update these endpoints to match the actual API used by the final application.
+
+## 🎨 Design
+
+The Read-Log interface uses a simple, clean design focused on readability and ease of use.
+
+The main interface includes:
+
+- Navigation bar
+- Reading statistics
+- Book library
+- Book management controls
+- Reading goal progress
+- Responsive layouts
+
+The design was planned in Figma before implementation.
+
+## 🌐 Deployment
+
+Live application:
+
+**[Add your deployed Read-Log URL here]**
+
+## 📌 Future Improvements
+
+Possible future features include:
+
+- Book cover images
+- Reading progress by page
+- Book ratings and reviews
+- Book categories
+- Advanced search and filtering
+- Reading history
+- Monthly reading statistics
+- User profiles
+- Social authentication
+- External books API integration
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👩‍💻 Author
+
+**Gladys Letting**
+
+Read-Log was developed as a React project to practice frontend development, API integration, and responsive web design.
